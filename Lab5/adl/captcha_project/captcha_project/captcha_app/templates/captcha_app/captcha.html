@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Validation</title>
+</head>
+<body>
+    <h2>CAPTCHA Verification</h2>
+    <form method="POST" id="captcha-form">
+        {% csrf_token %}
+        <div>
+            <label for="captcha">Enter the CAPTCHA: </label>
+            <input type="text" id="captcha" name="captcha" required>
+        </div>
+        <div>
+            <p>CAPTCHA: <strong>{{ captcha_text }}</strong></p>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        const form = document.getElementById('captcha-form');
+        const messageElement = document.getElementById('message');
+        let failedAttempts = 0;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const captchaInput = document.getElementById('captcha').value;
+
+            // Send the POST request
+            const response = await fetch("", {
+                method: "POST",
+                body: new FormData(form),
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                messageElement.innerText = data.message;
+            } else {
+                messageElement.innerText = data.message;
+                failedAttempts++;
+
+                // Disable input after 3 attempts
+                if (failedAttempts >= 3) {
+                    document.getElementById('captcha').disabled = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

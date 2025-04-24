@@ -1,0 +1,13 @@
+<h1>Insert WORKS Record</h1>
+<form method="post">{% csrf_token %}
+    {{ work_form.as_p }}
+    <button type="submit" name="add_work">Add Entry</button>
+</form>
+
+<hr>
+
+<h2>Query People by Company</h2>
+<form method="post">{% csrf_token %}
+    {{ query_form.as_p }}
+    <button type="submit" name="query_company">Find Employees</button>
+</form>

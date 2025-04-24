@@ -1,0 +1,8 @@
+<h2>People working at {{ company }}</h2>
+<ul>
+    {% for name, city in data %}
+        <li>{{ name }} - {{ city }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'index' %}">Back</a>

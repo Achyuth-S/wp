@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Selection Form</title>
+</head>
+<body>
+    <h2>Select Car Manufacturer and Enter Model</h2>
+    <form action="{% url 'car_result' %}" method="get">
+        <label for="manufacturer">Manufacturer:</label>
+        <select name="manufacturer" id="manufacturer">
+            {% for manu in manufacturers %}
+                <option value="{{ manu }}">{{ manu }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="model">Model Name:</label>
+        <input type="text" name="model" id="model" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

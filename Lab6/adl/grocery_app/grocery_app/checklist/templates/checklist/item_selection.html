@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Checklist</title>
+    <style>
+        /* Basic styling for better presentation */
+        body {
+            font-family: sans-serif;
+        }
+        .item-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .item-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Grocery Checklist</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <h2>Select Item:</h2>
+        <ul class="item-list">
+            {% if form.items %}
+        
+                {% for item in form.items %}
+                    <p>Item Name: {{ item }}</p>
+            
+                    <li>
+                        {{ item.render }}
+                        <label for="{{ item.id_for_label }}">{{ item.label }}</label>
+                    </li>
+                {% empty %}
+                    <p>form.items is empty (inside the loop).</p>
+                {% endfor %}
+            {% else %}
+                <p>form.items does NOT exist or is None.</p>
+            {% endif %}
+        </ul>
+    </div>
+    <button type="submit">Add Item</button>
+</form>
+
+{% if selected_items %}
+    <h2>Selected Items:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selected_items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+</body>
+</html>

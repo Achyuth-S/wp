@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Institute Dropdown</title>
+</head>
+<body>
+    <h2>Select an Institute</h2>
+    <form method="post">
+        {% csrf_token %}
+        <select name="institute_name">
+            {% for institute in institutes %}
+                <option value="{{ institute.name }}">{{ institute.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</body>
+</html>

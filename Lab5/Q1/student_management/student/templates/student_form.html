@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form p {
+            margin-bottom: 15px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        textarea {
+            display: block;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+        }
+
+       
+    </style>
+
+</head>
+<body>
+    <h1>Student Details Form</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if student_details %}
+        <h2>Student Details</h2>
+        <textarea rows="10" cols="50" readonly>{{ student_details }}</textarea>
+
+        <h3>Total Percentage: {{ percentage|floatformat:3 }}%</h3>
+    {% endif %}
+</body>
+</html>

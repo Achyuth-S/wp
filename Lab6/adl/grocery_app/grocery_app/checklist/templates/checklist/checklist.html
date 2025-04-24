@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Selected Grocery Items</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Selected Grocery Items</h1>
+
+{% if selected_items %}
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selected_items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No items selected.</p>
+{% endif %}
+
+<p><a href="/">Go back to item selection</a></p>
+
+</body>
+</html>
