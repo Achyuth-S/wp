@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Data</title>
+</head>
+<body>
+    <h1>Employees working at {{ company }}</h1>
+    {% if employees %}
+        <ul>
+            {% for employee in employees %}
+                <li>{{ employee.name }} - City: {{ employee.city }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No employees found for {{ company }}.</p>
+    {% endif %}
+    <p><a href="/employee/retrieve/">Retrieve Again</a></p>
+    <p><a href="/employee/insert/">Insert Work Data</a></p>
+</body>
+</html>
